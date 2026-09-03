@@ -1,3 +1,7 @@
 [user]
     name = bunnydeny
     email = guoy55448@gmail.com
+
+# 本机 DNS 走代理 fake-ip，IPv6 假地址不通，git 的 ssh 强制走 IPv4
+[core]
+    sshCommand = ssh -4
