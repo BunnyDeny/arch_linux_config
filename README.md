@@ -21,6 +21,7 @@ git clone <本仓库> ~/.config/arch_linux_config
 ./install/starship.sh          # 第 1 步：starship 提示符（含字体依赖，自动在 bash/fish 启用）
 ./install/waybar.sh            # 第 2 步：waybar 状态栏（含字体依赖）
 ./install/global.sh            # 第 3 步：全局配置（.bashrc、fish config、hyprland.lua）
+./install/kitty.sh             # 第 4 步：kitty 终端（shell fish + 字体大小）
 ```
 
 ## starship 配色预览与套用
