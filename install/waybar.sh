@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# 安装 waybar（Hyprland 状态栏）。依次执行：装包与字体依赖 → 建配置软链。
+# 安装 waybar（Hyprland 状态栏，Tokyo-Night 风格）。依次执行：装包与字体依赖 → 建配置软链。
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 source "${REPO_DIR}/install/lib.sh"
 
-# 1. 本体与依赖字体（配置用到 FontAwesome / Roboto / Nerd Font 字形）
+# 1. 本体与依赖字体（配置用到 Ubuntu Nerd / FontAwesome / 兜底字形）
 ensure_pkg waybar
-for pkg in otf-font-awesome ttf-roboto ttf-jetbrains-mono-nerd ttf-nerd-fonts-symbols; do
+for pkg in ttf-ubuntu-nerd ttf-jetbrains-mono-nerd ttf-nerd-fonts-symbols otf-font-awesome ttf-roboto; do
     ensure_pkg "${pkg}"
 done
 
