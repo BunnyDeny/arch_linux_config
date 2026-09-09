@@ -11,3 +11,5 @@ PS1='[\u@\h \W]\$ '
 
 #exec fish
 eval "$(starship init bash)"
+start-hyprland
+. "$HOME/.cargo/env"

@@ -36,7 +36,6 @@ hl.monitor({
 
 -- Set programs that you use
 local terminal    = "kitty"
-local fileManager = "thunar"
 local menu        = "fuzzel"
 
 
@@ -66,6 +65,11 @@ end)
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
+
+-- fcitx5 输入法（Chromium 系应用如微信需要，否则中文打不出来）
+hl.env("GTK_IM_MODULE", "fcitx")
+hl.env("QT_IM_MODULE",  "fcitx")
+hl.env("XMODIFIERS",    "@im=fcitx")
 
 
 -----------------------
@@ -267,7 +271,6 @@ hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + F2", hl.dsp.exec_cmd("pkill waybar || waybar"))
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
