@@ -22,9 +22,19 @@
 ------------------
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
+-- 通配默认规则：未被下方规则匹配的显示器使用首选模式、自动缩放
 hl.monitor({
-    output   = "DP-3",
-    mode     = "1920x1080@180",
+    output   = "",
+    mode     = "preferred",
+    position = "auto",
+    scale    = "auto"
+})
+
+-- 外接小米显示器。物理 HDMI 口在 GPU 侧枚举为 HDMI-A-1（不是 DP-x）。
+-- EDID 上限 144Hz：写 180 之类不存在的模式会导致黑屏。
+hl.monitor({
+    output   = "HDMI-A-1",
+    mode     = "1920x1080@144",
     position = "auto",
     scale    = "1.0"
 })
@@ -241,7 +251,7 @@ hl.config({
         sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
 
         touchpad = {
-            natural_scroll = false,
+            natural_scroll = true,
         },
     },
 })

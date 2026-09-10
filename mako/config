@@ -1,0 +1,35 @@
+# mako 通知守护进程配置
+#
+# 与 waybar 的 custom/notification 模块（notification.sh）配套：
+#   左键点击图标 → makoctl dismiss --all
+#   右键点击图标 → makoctl mode -t do-not-disturb
+#   中键点击图标 → makoctl restore
+#
+# 注意：没有这个文件的话，右键免打扰不会生效。
+# mako 里 do-not-disturb 只是一个"模式"名字，必须在这里定义它的行为。
+
+# ---------- 免打扰模式 ----------
+# 开启后所有通知不再弹出，但依然会进入 history（可用 makoctl restore 找回）
+[mode=do-not-disturb]
+invisible=1
+
+# ---------- 基础样式 ----------
+# 配色取自 Catppuccin Mocha，与你的 waybar / starship 保持一致
+font=Source Han Sans CN 11
+background-color=#1e1e2eFF
+text-color=#cdd6f4FF
+border-color=#89b4faFF
+border-radius=8
+border-size=2
+padding=10
+margin=8
+width=340
+
+# ---------- 行为 ----------
+# 通知默认停留 10 秒。不设的话 mako 默认是 0，即永不自动消失。
+default-timeout=10000
+
+# 鼠标交互
+on-button-left=invoke-default-action
+on-button-middle=dismiss
+on-button-right=dismiss

@@ -3,4 +3,4 @@ if status is-interactive
 end
 starship init fish | source
 
-alias dsh="cd /home/bunnydeny/.deepseek-harness && pnpm dsh web"
+abbr -a dsh "cd /home/bunnydeny/project/deepseek-harness && pnpm dsh web"
