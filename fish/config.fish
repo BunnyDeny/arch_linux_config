@@ -3,4 +3,6 @@ if status is-interactive
 end
 starship init fish | source
 
-abbr -a dsh "cd /home/bunnydeny/project/deepseek-harness && pnpm dsh web"
+abbr -a dsh "cd /home/bunnydeny/.deepseek-harness && pnpm dsh web"
+abbr -a ssh_server "ssh bunnydeny@154.9.254.26"
+zoxide init --cmd cd fish | source
