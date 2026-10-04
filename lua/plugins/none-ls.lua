@@ -13,11 +13,30 @@ return {
         end
 
         install("stylua")
+        -- rustfmt 不用装：rustup 里已经有了
 
         local null_ls = require("null-ls")
+
+        -- none-ls 没有内置 rustfmt，所以自己定义一个，内容就是调外部命令
+        local h = require("null-ls.helpers")
+        local methods = require("null-ls.methods")
+
+        local rustfmt = h.make_builtin({
+            name = "rustfmt",
+            method = methods.internal.FORMATTING,
+            filetypes = { "rust" },
+            generator_opts = {
+                command = "rustfmt",
+                args = { "--emit=stdout", "--edition", "2024" },
+                to_stdin = true,
+            },
+            factory = h.formatter_factory,
+        })
+
         null_ls.setup({
             sources = {
                 null_ls.builtins.formatting.stylua,
+                rustfmt,
             },
         })
     end,
@@ -30,4 +49,3 @@ return {
         }
     },
 }
-
