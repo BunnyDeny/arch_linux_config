@@ -33,6 +33,20 @@ return {
                 },
             },
         })
+
+        -- rust：包名 rust-analyzer，映射到的 lspconfig 名字是 rust_analyzer
+        -- 和 lua 完全一样的写法，不关心机器上装没装过
+        setup("rust-analyzer", {
+            settings = {
+                ["rust-analyzer"] = {
+                    -- 用 clippy 做检查
+                    check = { command = "clippy" },
+                    -- 检查所有 feature 组合下的代码
+                    cargo = { allFeatures = true },
+                },
+            },
+        })
+
         vim.diagnostic.config({ update_in_insert = true })
     end,
 }
