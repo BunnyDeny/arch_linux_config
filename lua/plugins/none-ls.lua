@@ -1,3 +1,4 @@
+-- 代码格式化插件，目前支持的语言有：lua，rust
 return {
     "nvimtools/none-ls.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
