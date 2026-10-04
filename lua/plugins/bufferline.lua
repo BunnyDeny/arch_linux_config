@@ -7,8 +7,26 @@ return {
         "nvim-tree/nvim-web-devicons",
     },
 
-    -- 只有设置了opts或者config，lazy才会setup插件
-    opts = {},
+    opts = {
+        options = {
+            diagnostics = "nvim_lsp",
+            diagnostics_indicator = function (_, _, diagnostics_dict, _)
+                local indicator = " "
+                for level, number in pairs(diagnostics_dict) do
+                    local symbol
+                    if level == "error" then
+                        symbol = " "
+                    elseif level == "warning" then
+                        symbol = " "
+                    else
+                        symbol = " "
+                    end
+                    indicator = indicator .. number .. symbol
+                end
+                return indicator
+            end
+        }
+    },
 
     -- 定义一些快捷键
     keys = {

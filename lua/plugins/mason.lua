@@ -19,6 +19,10 @@ return {
             -- mason 的包名 和 lspconfig 的 server 名不一定一样
             -- 比如 lua-language-server 对应的 lspconfig 名字是 lua_ls，所以要通过映射表转换
             local lsp = require("mason-lspconfig").get_mappings().package_to_lspconfig[name]
+            config.on_attach = function (client)
+                client.server_capabilities.documentFormattingProvider = false
+                client.server_capabilities.documentRangeFormattingProvider = false
+            end
             vim.lsp.config(lsp, config)
             vim.lsp.enable(lsp)
         end
