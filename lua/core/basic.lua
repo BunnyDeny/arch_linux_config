@@ -37,3 +37,9 @@ vim.opt.smartcase = true
 -- 不要在查找之后继续高亮匹配结果
 vim.opt.hlsearch = false
 
+-- 因为有了 lualine 来显示 mode，就不需要 neovim 自己在左下角显示
+-- mode 了。通过下面的代码将其禁用
+vim.opt.showmode = false
+
+-- 将选区寄存器默认设置为+寄存器以实现系统剪切板互通
+vim.opt.clipboard = "unnamedplus"
