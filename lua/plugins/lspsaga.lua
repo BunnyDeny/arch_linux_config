@@ -13,24 +13,24 @@ return {
 
     keys = {
         -- 重命名光标下的符号（带实时预览，回车确认，Ctrl+k 退出，或者ESC之后：q退出）
-        { "<leader>lr", ":Lspsaga rename<CR>" },
+        { "<leader>lr", ":Lspsaga rename<CR>", desc = "重命名符号" },
 
         -- code action，数字选择，回车确定，q取消
-        { "<leader>lc", ":Lspsaga code_action<CR>" },
+        { "<leader>lc", ":Lspsaga code_action<CR>", desc = "代码操作 (code action)" },
 
         -- 跳转到定义处。
-        { "<leader>ld", ":Lspsaga goto_definition<CR>" },
+        { "<leader>ld", ":Lspsaga goto_definition<CR>", desc = "跳转到定义" },
 
         -- 浮窗显示光标下符号的文档，任意方向键取消
-        { "<leader>lh", ":Lspsaga hover_doc<CR>" },
+        { "<leader>lh", ":Lspsaga hover_doc<CR>", desc = "显示符号文档" },
 
         -- 打开查找器，一次列出定义/引用/实现，q退出，回车跳转到选中的项
-        { "<leader>lR", ":Lspsaga finder<CR>" },
+        { "<leader>lR", ":Lspsaga finder<CR>", desc = "查找定义 / 引用 / 实现" },
 
         -- 跳到下一条诊断（错误/警告）
-        { "<leader>ln", ":Lspsaga diagnostic_jump_next<CR>" },
+        { "<leader>ln", ":Lspsaga diagnostic_jump_next<CR>", desc = "跳到下一条诊断" },
 
         -- 跳到上一条诊断
-        { "<leader>lp", ":Lspsaga diagnostic_jump_prev<CR>" },
+        { "<leader>lp", ":Lspsaga diagnostic_jump_prev<CR>", desc = "跳到上一条诊断" },
     }
 }

@@ -47,6 +47,7 @@ return {
             function()
                 vim.lsp.buf.format()
             end,
+            desc = "格式化当前文件",
         }
     },
 }
