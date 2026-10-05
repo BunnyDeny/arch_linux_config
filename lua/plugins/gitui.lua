@@ -38,12 +38,38 @@ return {
                     -- stdpath("config") 是 ~/.config/nvim，它是指向本仓库的软链接，
                     -- 所以算出来的就是仓库里的那两个文件
                     local dir = vim.fn.stdpath("config") .. "/gitui"
+                    local theme = dir .. "/theme.ron"
+                    local keys = dir .. "/key_bindings.ron"
 
-                    Snacks.terminal({
-                        "gitui",
-                        "-t", dir .. "/theme.ron",
-                        "-k", dir .. "/key_bindings.ron",
-                    }, {
+                    -- gitui 走的是 libgit2，对 SSH 地址**只认 ssh-agent 里的钥匙**，
+                    -- 不读 ~/.ssh 下的密钥文件（asyncgit 里写死了 Cred::ssh_key_from_agent）。
+                    -- 所以机器上没跑 agent 时，它的 fetch/pull/push 都会报一句自己编的
+                    -- "git error:Bad credentials."（那句不是 GitHub 说的）。
+                    --
+                    -- "ssh-agent <命令>" 这个写法会临时起一个 agent，命令结束时
+                    -- 把它一起收掉，不留后台进程 —— 于是不用改 ~/.ssh/config、
+                    -- 也不用动 shell 配置，换台电脑直接能用。
+                    --
+                    -- ssh-add 不带参数就是加 ~/.ssh 下的默认密钥；</dev/null 是为了
+                    -- 密钥万一有口令时立刻失败，而不是弹个提示把 nvim 卡住。
+                    --
+                    -- 但如果环境里本来就有 agent（比如你手动 ssh-add 过，或密钥在
+                    -- ~/.ssh/config 里指定了非默认文件名），那就直接用它，别另起。
+                    local cmd
+                    if vim.env.SSH_AUTH_SOCK and vim.env.SSH_AUTH_SOCK ~= "" then
+                        cmd = { "gitui", "-t", theme, "-k", keys }
+                    else
+                        cmd = {
+                            "ssh-agent",
+                            "sh", "-c",
+                            'ssh-add </dev/null 2>/dev/null; exec gitui -t "$1" -k "$2"',
+                            "sh", -- $0，占位用
+                            theme,
+                            keys,
+                        }
+                    end
+
+                    Snacks.terminal(cmd, {
                         -- gitui 里按 ⇧I 打开文件时用哪个编辑器，是它自己从环境变量里找的，
                         -- 顺序是 GIT_EDITOR → git config core.editor → $VISUAL → $EDITOR → vi
                         -- （src/popups/externaleditor.rs）。
