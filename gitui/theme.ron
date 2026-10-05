@@ -1,0 +1,9 @@
+// gitui 的主题文件
+(
+    command_fg: Some("#f8f8f8"),   // 可用的命令：正文白，对比度约 5:1
+    cmdbar_bg: Some("#925088"),    // 提示条底色：主题的粉掺一半编辑器底色
+    disabled_fg: Some("#8f86b0"),  // 当前不可用的命令：比正文暗一档但仍看得清
+
+    selection_bg: Some("#463465"),
+    selection_fg: Some("#f8f8f8"),
+)

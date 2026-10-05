@@ -12,6 +12,7 @@ return {
         spec = {
             { "<leader>b", group = "buffer" },
             { "<leader>f", group = "模糊查找" },
+            { "<leader>g", group = "git" },
             { "<leader>l", group = "LSP" },
             { "<leader>h", group = "hop 跳转" },
             { "<leader>u", group = "界面 / 开关" },
