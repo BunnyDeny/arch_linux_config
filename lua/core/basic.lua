@@ -41,5 +41,14 @@ vim.opt.hlsearch = false
 -- mode 了。通过下面的代码将其禁用
 vim.opt.showmode = false
 
--- 将选区寄存器默认设置为+寄存器以实现系统剪切板互通
+-- 将选剪切板器默认设置为+寄存器和unname寄存器以实现系统剪切板互通
+--
+-- 补充：下面这一行只负责把寄存器【接到】+ 上，它本身不提供剪贴板的读写能力。
+-- 那个能力来自 nvim 的 clipboard provider，也就是一个外部程序。
+-- Wayland 环境下需要装 wl-clipboard（提供 wl-copy / wl-paste）：
+--     sudo pacman -S wl-clipboard
+-- 不装的话 has("clipboard") 会是 0 —— 表现是 yy 复制了、粘出来却是空的，
+-- 而且全程不报错（nvim 只是找不到任何可用的剪贴板工具）。
+-- 另外这行会立刻触发 provider 初始化，所以必须有一个"同步就能找到"的工具，
+-- 不能只依赖 OSC52 那种需要等终端回应的探测（时序不稳，实测会失败）。
 vim.opt.clipboard = "unnamedplus"
