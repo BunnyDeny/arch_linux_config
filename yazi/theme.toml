@@ -1,0 +1,101 @@
+# yazi 的主题。
+#
+# ---- 怎么换主题 ----
+#
+# 就一行：改下面的 dark = "名字"，然后**重开 yazi**（yazi 只在启动时读配置）。
+# 所有主题都已经装好了，切换不需要再跑任何命令。
+#
+# ---- 主题是怎么装上的 ----
+#
+# install/yazi.sh 里第 3 步会一次性把这 37 个主题全装上（已经装过了，会跳过）。
+# 装进来的东西落在 flavors/ 里，跟着仓库走 git；ya pkg 生成的清单也在
+# package.toml 里，所以换机器跑一次 install/yazi.sh 就全回来了。
+#
+# 脚本还会把每个主题里的 preview.png 删掉 —— 那只是 GitHub 页面上给人看的
+# 缩略图，yazi 运行时用不到，但占了单个主题体积的八成。
+# 删掉后这 37 个合起来是 3M，不删是 28M。
+# （哪天跑了 ya pkg upgrade，预览图会回来，再跑一次脚本即可。）
+#
+# ---- 如果以后要加新主题 ----
+#
+#   ya pkg add <ID>                     装（装完也要加到 install/yazi.sh 的清单里）
+#   ya pkg delete <ID>                  删（同时清掉 flavors/ 里的目录和 package.toml 记录）
+#
+# ID 有两种写法（冒号左边是仓库，右边是仓库里的子目录）：
+#   <owner>/<repo>                      仓库本身就是一个 flavor（yazi 自动补 .yazi）
+#   <owner>/<repo>:<名字>               一个仓库里放了多个 flavor
+#
+# 注意**不能**写成 BennyOe/tokyo-night.yazi —— 会报 "must be in kebab-case"，
+# 因为 yazi 拿仓库名当包名校验，点号不算合法字符。
+#
+# ---- 想只微调某个主题的几个颜色 ----
+#
+# 写在 [flavor] 后面覆盖它即可，比如：
+#   [mgr]
+#   cwd = { fg = "#ff0000" }
+#
+# 实测过：theme.toml 里的覆盖一定生效（连 flavor 里没有的键也能加），
+# 这是调整细节最靠得住的一条路。
+
+[flavor]
+dark  = "monokai"
+light = ""
+
+
+# ============================================================================
+#  下面 37 个都已装好      dark = "..." 里填的就是每行开头那个名字
+# ============================================================================
+#
+# ---- 官方仓库自带（都在 yazi-rs/flavors 里）----
+#
+#   catppuccin-mocha        yazi-rs/flavors:catppuccin-mocha        ← 现在用的
+#   catppuccin-latte        yazi-rs/flavors:catppuccin-latte        （浅色）
+#   catppuccin-frappe       yazi-rs/flavors:catppuccin-frappe
+#   catppuccin-macchiato    yazi-rs/flavors:catppuccin-macchiato
+#   dracula                 yazi-rs/flavors:dracula
+#
+# ---- 社区主题 ----
+#
+#   synthwave84             CFY98/synthwave84                       ← 和你 nvim 的 retrowave 同风格，建议先试
+#   tokyo-night             BennyOe/tokyo-night
+#   rose-pine               Mintass/rose-pine
+#   rose-pine-moon          Mintass/rose-pine-moon
+#   rose-pine-dawn          Mintass/rose-pine-dawn                  （浅色）
+#   kanagawa                dangooddd/kanagawa
+#   kanagawa-dragon         marcosvnmelo/kanagawa-dragon
+#   kanagawa-lotus          muratoffalex/kanagawa-lotus
+#   kanagawa-paper          melindachang/kanagawa-paper
+#   gruvbox-dark            bennyyip/gruvbox-dark
+#   gruvbox-light           Sh00Fly/gruvbox-light                   （浅色）
+#   gruvbox-material        matt-dong-123/gruvbox-material
+#   everforest-medium       Chromium-3-Oxide/everforest-medium
+#   ayu-dark                kmlupreti/ayu-dark
+#   nord                    AdithyanA2005/nord
+#   monokai                 Malick-Tammal/monokai
+#   neon                    tomer-ben-david/neon
+#   eldritch                6ruby1/eldritch
+#   lain                    identityapproved/lain
+#   modus                   azzamsa/modus
+#   base16                  matt-dong-123/base16
+#   claude-inspired         rapidrabbit76/claude-inspired
+#   aurora-dawn             kshawkat/aurora-dawn
+#   aurora-storm            kshawkat/aurora-storm
+#   sequoia                 cisco336/sequoia
+#   thinkpad-red-oled       AdmiralBarbarossa/thinkpad-red-oled
+#
+# ---- 这几个是子目录写法（一个仓库里放了多个主题，要带冒号）----
+#
+#   ashen                   ficcdaf/ashen:ashen
+#   bluloco-dark            hankertrix/bluloco-yazi:bluloco-dark
+#   bluloco-light           hankertrix/bluloco-yazi:bluloco-light    （浅色）
+#   obsidian-glow           ZimCodes/yazi-flavors:obsidian-glow
+#   flexoki-dark            gosxrgxx/flexoki-dark
+#   flexoki-light           gosxrgxx/flexoki-light                   （浅色）
+#
+# ---- 官方清单里还有一个没收进来的 ----
+#
+#   dimidium   Raideeen/dimidium
+#       那个仓库里有 yazi 处理不了的东西（example/link-to-folder），
+#       装它会直接报错 "the source path is neither a regular file nor a symlink"。
+#
+# 完整清单（会更新）：https://github.com/yazi-rs/flavors
