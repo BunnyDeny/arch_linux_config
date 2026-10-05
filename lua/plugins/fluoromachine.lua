@@ -10,11 +10,15 @@ return {
         theme = "retrowave", -- 可选 fluoromachine / retrowave / delta
         glow = true,             -- 霓虹发光效果，就是它最标志性的那个感觉
 
-        -- false → nvim 自己画背景色（glow 模式下是 #200933 深紫），整个窗口颜色统一
-        -- true  → 露出 kitty 的底色（你现在是 Catppuccin-Mocha 的 #1e1e2e），
-        --         但 fluoromachine 的霓虹配色是围绕紫色底设计的，压在灰蓝底上会不搭
-        -- 想用 true，就把 kitty 的 background 也改成 #200933，两边就统一了
-        transparent = false,
+        -- true → nvim 不画背景色，露出 kitty 的底色（配合 kitty 的
+        --        background_opacity 就是透明的；关了它就是纯色）
+        -- false → nvim 自己画背景色（glow 模式下是 #200933 深紫），
+        --         整个窗口颜色统一，但会盖掉 kitty 的透明度
+        --
+        -- 注意：kitty 的 background_opacity 只对「背景色 == 终端默认背景色」的格子
+        -- 生效，所以只要 nvim 画了底色，透明度就看不出来 —— 这就是之前不透明的
+        -- 原因。要让霓虹配色好看，可以把 kitty 的 background 也改成 #200933。
+        transparent = true,
     },
     config = function(_, opts)
         require("fluoromachine").setup(opts)
