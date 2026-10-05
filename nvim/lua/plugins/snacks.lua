@@ -34,6 +34,7 @@ return {
                 },
             },
         },
+        image = { enabled = false },
     },
 
     keys = {
