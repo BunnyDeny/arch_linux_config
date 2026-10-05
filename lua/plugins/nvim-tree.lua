@@ -11,6 +11,12 @@ return {
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
+        -- 让树的根目录跟着 :cd 走。默认是 false，也就是 nvim 换了工作目录、
+        -- 树还停在原地 —— <leader>fz（zoxide 跳目录）用的是全局 :cd，
+        -- 所以不加这行的话，跳完目录树还是显示旧的文件。
+        -- 打开时会在 DirChanged 事件上注册 callback 重新挂根
+        sync_root_with_cwd = true,
+
         actions = {
             open_file = {
                 quit_on_open = true,
@@ -18,6 +24,7 @@ return {
         },
     },
     keys = {
+        -- 开关：关着就开、开着就关
         { "<leader>uf", ":NvimTreeToggle<CR>", desc = "开关文件树" },
     },
 }

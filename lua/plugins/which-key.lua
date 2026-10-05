@@ -8,9 +8,10 @@ return {
         delay = 300,
 
         -- 给 <leader> 下面每个字母起个组名。
-        -- 不写这些的话，弹窗里只显示光秃秃的 b / l / h / u，看不出是哪一类
+        -- 不写这些的话，弹窗里只显示光秃秃的 b / f / l / h / u，看不出是哪一类
         spec = {
             { "<leader>b", group = "buffer" },
+            { "<leader>f", group = "模糊查找" },
             { "<leader>l", group = "LSP" },
             { "<leader>h", group = "hop 跳转" },
             { "<leader>u", group = "界面 / 开关" },
