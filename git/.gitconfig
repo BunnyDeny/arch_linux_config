@@ -5,3 +5,8 @@
 # 本机 DNS 走代理 fake-ip，IPv6 假地址不通，git 的 ssh 强制走 IPv4
 [core]
     sshCommand = ssh -4
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
