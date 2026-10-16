@@ -10,3 +10,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[url "http://192.168.110.216:8787/"]
+	insteadOf = https://gitlab.motorevo.dpdns.org/

@@ -41,6 +41,30 @@ vim.opt.hlsearch = false
 -- mode 了。通过下面的代码将其禁用
 vim.opt.showmode = false
 
+-- SSH/无显示器环境：显式注册 OSC 52 剪贴板（经终端与本地系统剪贴板互通）。
+-- 判断标准：没有任何 X/Wayland 显示器 → 系统剪贴板工具（xsel/xclip 之类）装了也是废物；
+-- 有显示器但三个工具都没装 → 也退回 OSC 52（kitty 下同样能用）。
+-- 注意：这里不是靠 nvim 的 provider 自动探测（那需要终端往返、时序不稳），
+-- 而是直接指定 vim.g.clipboard，所以必须放在下面 unnamedplus 那行【之前】，
+-- 否则那行一执行就会先按"找外部工具"的路子初始化剪贴板并失败。
+local has_display = vim.env.DISPLAY ~= nil or vim.env.WAYLAND_DISPLAY ~= nil
+local has_clip_tools = vim.fn.executable("wl-copy") == 1
+    or vim.fn.executable("xclip") == 1
+    or vim.fn.executable("xsel") == 1
+if not has_display or not has_clip_tools then
+    vim.g.clipboard = {
+        name = "OSC 52",
+        copy = {
+            ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+            ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+        },
+        paste = {
+            ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+            ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+        },
+    }
+end
+
 -- 将选剪切板器默认设置为+寄存器和unname寄存器以实现系统剪切板互通
 --
 -- 补充：下面这一行只负责把寄存器【接到】+ 上，它本身不提供剪贴板的读写能力。

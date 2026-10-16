@@ -6,6 +6,7 @@
 [mgr]
 prepend_keymap = [
 	{ on = "!", run = 'shell kitty', desc = "Single action with `Ctrl + a`" },
+    { on = ["M","s"], run = "plugin sshfs -- menu",            desc = "Open SSHFS options" },
 ]
 keymap = [
 	{ on = "<Esc>", run = "escape",             desc = "Exit visual mode, clear selection, or exit view" },
